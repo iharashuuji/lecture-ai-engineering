@@ -108,31 +108,31 @@ st.subheader("テーブル")
 st.table(df)
 
 # メトリクス表示
-# st.subheader("メトリクス")
-# col1, col2, col3 = st.columns(3)
-# col1.metric("温度", "23°C", "1.5°C")
-# col2.metric("湿度", "45%", "-5%")
-# col3.metric("気圧", "1013hPa", "0.1hPa")
+st.subheader("メトリクス")
+col1, col2, col3 = st.columns(3)
+col1.metric("温度", "23°C", "1.5°C")
+col2.metric("湿度", "45%", "-5%")
+col3.metric("気圧", "1013hPa", "0.1hPa")
 
 # ============================================
 # グラフ表示
 # ============================================
-# st.header("グラフの表示")
+st.header("グラフの表示")
 
 # ラインチャート
-# st.subheader("ラインチャート")
-# chart_data = pd.DataFrame(
-#     np.random.randn(20, 3),
-#     columns=['A', 'B', 'C'])
-# st.line_chart(chart_data)
+st.subheader("ラインチャート")
+chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=['A', 'B', 'C'])
+st.line_chart(chart_data)
 
 # バーチャート
-# st.subheader("バーチャート")
-# chart_data = pd.DataFrame({
-#     'カテゴリ': ['A', 'B', 'C', 'D'],
-#     '値': [10, 25, 15, 30]
-# }).set_index('カテゴリ')
-# st.bar_chart(chart_data)
+st.subheader("バーチャート")
+chart_data = pd.DataFrame({
+    'カテゴリ': ['A', 'B', 'C', 'D'],
+    '値': [10, 25, 15, 30]
+}).set_index('カテゴリ')
+st.bar_chart(chart_data)
 
 # ============================================
 # インタラクティブ機能
