@@ -193,8 +193,6 @@ def save_baseline(metrics):
         json.dump(metrics, f, indent=2)
 
 
-
-
 def test_accuracy_regression(train_model):
     """モデル精度の劣化チェック"""
     model, X_test, y_test = train_model
