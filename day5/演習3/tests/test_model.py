@@ -175,3 +175,39 @@ def test_model_reproducibility(sample_data, preprocessor):
     ), "モデルの予測結果に再現性がありません"
 
 
+######### 案１
+
+BASELINE_PATH = os.path.join(os.path.dirname(__file__), "baseline_metrics.json")
+
+
+def load_baseline():
+    if os.path.exists(BASELINE_PATH):
+        with open(BASELINE_PATH, "r") as f:
+            return json.load(f)
+    else:
+        return None
+
+
+def save_baseline(metrics):
+    with open(BASELINE_PATH, "w") as f:
+        json.dump(metrics, f, indent=2)
+
+
+
+
+def test_accuracy_regression(train_model):
+    """モデル精度の劣化チェック"""
+    model, X_test, y_test = train_model
+    baseline = load_baseline()
+
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+
+    if baseline is None:
+        # 初回はベースラインを保存してスキップ
+        save_baseline({"accuracy": accuracy})
+        pytest.skip("ベースライン精度を保存しました。次回から劣化チェックを行います。")
+
+    assert (
+        accuracy >= baseline["accuracy"] - 0.02
+    ), f"精度がベースラインより低下しています: {accuracy} < {baseline['accuracy']}"
